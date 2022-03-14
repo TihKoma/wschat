@@ -1,0 +1,229 @@
+html, body {
+	height: 0;
+	scroll-behavior: smooth;
+}
+
+#wschatPanel *, ::after, ::before {
+    box-sizing: border-box;
+}
+/* button, input, optgroup, select, textarea { */
+	
+#wschatPanel button, #wschatPanel input, #wschat-admin button, #wschat-admin input {
+    margin: 0;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+	font-size: 1rem;
+    line-height: 1.5;
+	font-weight: 400;
+	color: #212529;
+}
+
+#wschatPanel {
+	z-index: 10;
+	width: 400px;
+	height: 500px;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	border-radius: 10px;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+	font-size: 1rem;
+	font-weight: 400;
+	color: #212529;
+}
+
+#docsPanel {
+	width: 100%;
+	height: 64px;
+}
+
+#wschatHeader {
+	height: 56px;
+	width: 100%;
+	/* background-color: #919191; */
+	background-color: white;
+	border: 1px solid #eb642b;
+}
+
+#wschatHeader div {
+	float: left;
+	margin-left: 10px;
+	/* color: white; */
+	margin-top: 2px;
+	padding-top: 2px;
+}
+
+#wschatHeader div img {
+	/* border-radius: 50%; */
+	/* border: 1.5px solid #f5f6fa; */
+	width: 45px;
+	height: 45px;
+	margin-top: 2px;
+}
+
+#wschatHeaderText span {
+	font-size: 20px;
+}
+
+#wschatHeaderText p {
+	font-size: 10px;
+	/* color: rgba(255,255,255,0.6); */
+	margin: 2px 0;
+	padding: 0;
+}
+
+#chatOpenIcon {
+	position: fixed;
+	right: 5px;
+    bottom: 3px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#wschatHide {
+	float: right !important;
+	margin-right: 10px;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+#wschatHide:hover {
+	text-decoration: underline;
+}
+
+#mywschatBody {
+	padding: 10px;
+	padding-top: 20px;
+	height: 372px;
+	width: 100%;
+	overflow: auto;
+	scroll-behavior: smooth;
+	background-color: white;
+	border-left: 1px solid #eb642b;
+	border-right: 1px solid #eb642b;
+	line-height: 1.5;
+}
+
+.wschatBodyMessage, .wschatBodyMessageRight {
+	/* min-height: 50px; */
+	width: 100%;
+	margin-bottom: 5px;
+	display: flex;
+}
+
+.wschatBodyMessageRight {
+	justify-content: flex-end;
+}
+
+.wschatBodyMessage div {
+	float: left;
+}
+
+.wschatBodyMessageSpan {
+	text-align: left;
+}
+
+.wschatBodyMessageAvatar img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border: 1.5px solid #f5f6fa;
+}
+
+.wschatBodyMessageContainer, .wschatBodyMessageRightContainer {
+	/* width: 80%; */
+	min-width: 110px;
+	max-width: 80%;
+	margin-left: 15px;
+}
+
+.wschatBodyMessageRightContainer {
+	text-align: right;
+	margin-right: 5px;
+}
+
+.wschatBodyMessageContainer p, .wschatBodyMessageRightContainer p {
+	font-size: 10px;
+	color: rgba(0, 0, 0, 0.6);
+	/* width: 80%; */
+	margin: 0;
+	padding: 0;
+}
+
+.wschatBodyMessageRightContainer p {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.wschatMsgCommand {
+	font-style: italic;
+}
+
+.wschatBodyMessageContainer span, .wschatBodyMessageRightContainer span {
+	display: inline-block;
+	padding: 10px;
+	border-radius: 15px;
+	/* background-color: #dddddd; */
+	background-color: #ffe5c9;
+	max-width: 100%;
+	overflow-wrap: break-word;
+	padding: 4px 10px;
+}
+
+.wschatBodyMessageRightContainer span {
+	background-color: #ffd99d;
+}
+
+#wschatFooter {
+	height: 64px;
+	width: 100%;
+	/* background-color: #919191; */
+	background-color: white;
+	border: 1px solid #eb642b;
+	position: relative;
+	bottom: 0;
+	padding: 10px;
+}
+
+#wschatFooterContainer {
+	border-radius: 10px;
+	width: 100%;
+	height: 100%;
+	/* background-color: rgba(0,0,0,.33); */
+	background-color: rgb(255 218 148 / 33%);
+}
+
+#wschatFooterContainerTextfield {
+	width: 93%;
+	height: 100%;
+	float: left;
+}
+
+#wschatFooterContainerTextfield input {
+	width: 100%;
+	background-color: rgba(0,0,0,0.0) !important;
+    border: 0 !important;
+    /* color: white !important; */
+    height: 100%;
+	overflow-y: auto;
+	padding: 0 10px;
+}
+
+#wschatFooterContainer input:focus {
+	box-shadow: none !important;
+    outline: 0px !important;
+}
+
+#wschatFooterBtnSend {
+	width: 7%;
+	float: left;
+	height: 100%;
+	padding: 8px 0 0 1px;
+	border-left: 2px solid #d7b4a6;
+	cursor: pointer;
+}
+
+#wschatFooterBtnSend img {
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+}

@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wschat-uat-config
+  namespace: lite-credit-uat
+  labels:
+    app: wschat-uat
+data:
+  db.config.js: |
+        const HOST = 'ora-se-2';
+        const DB = 'WAPPUAT';
+        const USER = 'pipeline_iis';
+        const PWD = 'tin6WhiteCramb2043';
+        const PORT = 1522;
+
+        const PIPE_HOST = 'app-wapp-demo';
+        const PIPE_PORT = '99';
+        
+        const ALLOW_LIST = ['http://app-wapp-demo:99'];
+        
+        module.exports = {
+            HOST, DB, USER, PWD, PORT, PIPE_HOST, PIPE_PORT, ALLOW_LIST
+        };
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: wschat-uat
+  namespace: lite-credit-uat
+  labels:
+    app: wschat-uat
+spec:
+  selector:
+    app: wschat-uat
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: wschat-uat
+  namespace: lite-credit-uat
+  labels:
+    app: wschat-uat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wschat-uat
+  template:
+    metadata:
+      labels:
+        app: wschat-uat
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: appver
+                operator: In
+                values:
+                - wschat-uat0000000000
+            topologyKey: "kubernetes.io/hostname"
+      volumes:
+      - name: wschat-uat-config
+        configMap:
+          name: wschat-uat-config
+      - name: tz-config
+        hostPath:
+           path: /usr/share/zoneinfo/Asia/Omsk
+#           path: /usr/share/zoneinfo/Europe/Moscow 
+      containers:
+      - name: wschat-uat
+        image: dev-vm-134:5000/wschat:latest
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: wschat-uat-config
+          mountPath: /app/db.config.js
+          subPath: db.config.js
+        - name: tz-config
+          mountPath: /etc/localtime
+        imagePullPolicy: Always
+        env:
+        - name: "K8deploymentVersion"
+          value: "0000000000"

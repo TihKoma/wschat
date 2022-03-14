@@ -1,0 +1,66 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: wschat
+  namespace: lite-credit
+  labels:
+    app: wschat
+spec:
+  selector:
+    app: wschat
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: wschat
+  namespace: lite-credit
+  labels:
+    app: wschat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wschat
+  template:
+    metadata:
+      labels:
+        app: wschat
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: appver
+                operator: In
+                values:
+                - wschat0000000000
+            topologyKey: "kubernetes.io/hostname"
+      volumes:
+      - name: wschat-config
+        configMap:
+          name: wschat-config
+      - name: tz-config
+        hostPath:
+           path: /usr/share/zoneinfo/Asia/Omsk
+#           path: /usr/share/zoneinfo/Europe/Moscow 
+      containers:
+      - name: wschat
+        image: lc-srv-1:5000/wschat:latest
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: wschat-config
+          mountPath: /app/db.config.js
+          subPath: db.config.js
+        - name: tz-config
+          mountPath: /etc/localtime
+        imagePullPolicy: Always
+        env:
+        - name: "K8deploymentVersion"
+          value: "0000000000"

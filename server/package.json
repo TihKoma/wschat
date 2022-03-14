@@ -1,0 +1,33 @@
+{
+  "name": "wschat-server",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "dateformat": "^4.5.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "oracledb": "^5.1.0",
+    "request": "^2.88.2",
+    "socket.io": "^3.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "npm install express\r npm install socket.io\r npm install pg\r npm install oracledb",
+  "main": "server.js",
+  "devDependencies": {},
+  "keywords": [
+    "wschat"
+  ],
+  "author": "photon",
+  "license": "ISC"
+}
